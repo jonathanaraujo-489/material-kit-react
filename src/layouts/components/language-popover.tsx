@@ -11,6 +11,27 @@ import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 
 // ----------------------------------------------------------------------
 
+// 1. LISTA DE IDIOMAS DEFINIDA DIRETAMENTE NO ARQUIVO
+const LANGUAGES = [
+  {
+    value: 'pt-BR',
+    label: 'Português (BR)',
+    icon: 'https://cdn.jsdelivr.net/gh/circle-flags/circle-flags/flags/br.svg',
+  },
+  {
+    value: 'en',
+    label: 'English',
+    icon: 'https://cdn.jsdelivr.net/gh/circle-flags/circle-flags/flags/gb.svg',
+  },
+  {
+    value: 'es',
+    label: 'Spanish',
+    icon: 'https://cdn.jsdelivr.net/gh/circle-flags/circle-flags/flags/es.svg',
+  },
+];
+
+// ----------------------------------------------------------------------
+
 export type LanguagePopoverProps = IconButtonProps & {
   data?: {
     value: string;
@@ -19,15 +40,17 @@ export type LanguagePopoverProps = IconButtonProps & {
   }[];
 };
 
-export function LanguagePopover({ data = [], sx, ...other }: LanguagePopoverProps) {
+export function LanguagePopover({ data = LANGUAGES, sx, ...other }: LanguagePopoverProps) { // 2. USANDO A LISTA COMO PADRÃO
   const { open, anchorEl, onClose, onOpen } = usePopover();
 
-  const [locale, setLocale] = useState(data[0].value);
+  // 3. INICIALIZAÇÃO SEGURA DO IDIOMA
+  const [locale, setLocale] = useState(data?.[0]?.value ?? 'pt-BR');
 
   const handleChangeLang = useCallback(
     (newLang: string) => {
       setLocale(newLang);
       onClose();
+      // Aqui você pode adicionar a lógica para mudar o idioma da aplicação
     },
     [onClose]
   );

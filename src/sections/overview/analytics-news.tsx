@@ -10,7 +10,6 @@ import CardHeader from '@mui/material/CardHeader';
 import ListItemText from '@mui/material/ListItemText';
 
 import { fToNow } from 'src/utils/format-time';
-
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 
@@ -24,7 +23,7 @@ type Props = CardProps & {
     title: string;
     coverUrl: string;
     description: string;
-    postedAt: string | number | null;
+    postedAt: any;
   }[];
 };
 
@@ -32,7 +31,6 @@ export function AnalyticsNews({ title, subheader, list, sx, ...other }: Props) {
   return (
     <Card sx={sx} {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 1 }} />
-
       <Scrollbar sx={{ minHeight: 405 }}>
         <Box sx={{ minWidth: 640 }}>
           {list.map((item) => (
@@ -40,7 +38,6 @@ export function AnalyticsNews({ title, subheader, list, sx, ...other }: Props) {
           ))}
         </Box>
       </Scrollbar>
-
       <Box sx={{ p: 2, textAlign: 'right' }}>
         <Button
           size="small"
@@ -55,7 +52,6 @@ export function AnalyticsNews({ title, subheader, list, sx, ...other }: Props) {
 }
 
 // ----------------------------------------------------------------------
-
 type ItemProps = BoxProps & {
   item: Props['list'][number];
 };
@@ -63,17 +59,15 @@ type ItemProps = BoxProps & {
 function Item({ item, sx, ...other }: ItemProps) {
   return (
     <Box
-      sx={[
-        (theme) => ({
-          py: 2,
-          px: 3,
-          gap: 2,
-          display: 'flex',
-          alignItems: 'center',
-          borderBottom: `dashed 1px ${theme.vars.palette.divider}`,
-        }),
+      sx={{
+        py: 2,
+        px: 3,
+        gap: 2,
+        display: 'flex',
+        alignItems: 'center',
+        borderBottom: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
         ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      }}
       {...other}
     >
       <Avatar
@@ -82,19 +76,14 @@ function Item({ item, sx, ...other }: ItemProps) {
         src={item.coverUrl}
         sx={{ width: 48, height: 48, flexShrink: 0 }}
       />
-
       <ListItemText
         primary={<Link color="inherit">{item.title}</Link>}
         secondary={item.description}
         slotProps={{
           primary: { noWrap: true },
-          secondary: {
-            noWrap: true,
-            sx: { mt: 0.5 },
-          },
+          secondary: { noWrap: true, sx: { mt: 0.5 } },
         }}
       />
-
       <Box sx={{ flexShrink: 0, typography: 'caption', color: 'text.disabled' }}>
         {fToNow(item.postedAt)}
       </Box>

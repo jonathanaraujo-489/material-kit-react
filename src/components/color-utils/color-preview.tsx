@@ -21,7 +21,7 @@ export type ColorPreviewProps = React.ComponentProps<typeof ColorPreviewRoot> & 
 
 export function ColorPreview({
   sx,
-  colors,
+  colors = [],
   className,
   slotProps,
   gap = 6,
