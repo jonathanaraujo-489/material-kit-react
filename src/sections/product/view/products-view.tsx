@@ -20,6 +20,7 @@ import { ProductFilters } from '../product-filters';
 import type { FiltersProps } from '../product-filters';
 import type { ProductItemProps } from '../product-item';
 
+
 // ----------------------------------------------------------------------
 
 const GENDER_OPTIONS = [ { value: 'men', label: 'Men' }, { value: 'women', label: 'Women' }, { value: 'kids', label: 'Kids' } ];

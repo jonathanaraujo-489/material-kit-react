@@ -8,6 +8,7 @@ import { fCurrency } from 'src/utils/format-number';
 
 import { Label } from 'src/components/label';
 import { ColorPreview } from 'src/components/color-utils';
+import ImagemComFallback from 'src/components/componentesj/ImagemComFallback';
 
 // ----------------------------------------------------------------------
 
@@ -39,19 +40,18 @@ export function ProductItem({ product }: { product: ProductItemProps }) {
   );
 
   const renderImg = (
-    <Box
-      component="img"
-      alt={product.name}
-      src={product.coverUrl}
-      sx={{
-        top: 0,
-        width: 1,
-        height: 1,
-        objectFit: 'cover',
-        position: 'absolute',
-      }}
-    />
-  );
+  <ImagemComFallback
+    alt={product.name}
+    src={product.coverUrl}
+    style={{
+      top: 50,
+      width: '100%',
+      height: '80%',
+      objectFit: 'cover',
+      position: 'absolute',
+    }}
+  />
+);
 
   const renderPrice = (
     <Typography variant="subtitle1">
